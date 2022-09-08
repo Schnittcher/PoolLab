@@ -10,6 +10,10 @@ declare(strict_types=1);
             ['PL_Chlorine_Total_Comment', 'PL Chlorine Total Comment', VARIABLETYPE_STRING, '', false, true],
             ['PL_Chlorine_Free', 'PL Chlorine Free', VARIABLETYPE_FLOAT, '', false, true],
             ['PL_Chlorine_Free_Comment', 'PL Chlorine Free Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_TAlka', 'PL Alkalinity', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_TAlka_Comment', 'PL Alkalinity Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_Cyanuric_Acid', 'PL Cyanuric Acid', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_Cyanuric_Acid_Comment', 'PL Cyanuric Acid Comment', VARIABLETYPE_STRING, '', false, true],
         ];
 
         public function Create()
@@ -91,6 +95,8 @@ declare(strict_types=1);
                     continue;
                 }
                 $parameterName = str_replace('_', ' ', $variable['Ident']);
+                //Sonderfall Minus im ParameterName
+                $parameterName = str_replace('PL TAlka', 'PL T-Alka', $parameterName);
 
                 $measurements = $this->updateMeasurements(0, 0, $parameterName);
                 if (empty($measurements)) {
@@ -127,11 +133,11 @@ declare(strict_types=1);
 
                     //Löscht alle Daten für die Value Variable aus dem Archiv
                     AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident']), 0, 0);
-                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']),true);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']), true);
 
                     //Löscht alle Daten für die Comment Variable aus dem Archiv
                     AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), 0, 0);
-                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'),true);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), true);
 
                     //Values
                     AC_AddLoggedValues($archiveID, $this->GetIDForIdent($variable['Ident']), $Values);
@@ -142,8 +148,8 @@ declare(strict_types=1);
                     AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'));
 
                     //Logging deaktivieren
-                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']),false);
-                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'),false);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']), false);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), false);
                 }
 
                 $this->SendDebug('Update :: ' . $variable['Ident'], $measurements[0]['value'], 0);
@@ -154,6 +160,8 @@ declare(strict_types=1);
 
         public function updateMeasurements(int $StartTime, int $EndTime, string $parameterName)
         {
+            $this->SendDebug(__FUNCTION__ . ' :: ' . $parameterName, $parameterName, 0);
+
             $Data = [];
             $Buffer = [];
 
