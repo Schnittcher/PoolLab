@@ -3,7 +3,7 @@
     "name": "PLAccount",
     "type": 2,
     "vendor": "Water ID",
-    "aliases": [],
+    "aliases": ["PoolLab Account Splitter"],
     "parentRequirements": ["{76339EB6-91E7-B97F-159C-71F769BA285A}"],
     "childRequirements": [
         "{BDB301B3-E29A-F60F-89D0-9DF13FC45DF4}"

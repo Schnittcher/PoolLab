@@ -3,7 +3,7 @@
     "name": "Configurator",
     "type": 4,
     "vendor": "Water ID",
-    "aliases": [],
+    "aliases": ["PoolLab Konfigurator"],
     "parentRequirements": [
         "{76339EB6-91E7-B97F-159C-71F769BA285A}"
     ],

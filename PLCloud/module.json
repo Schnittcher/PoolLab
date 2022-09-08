@@ -3,7 +3,7 @@
     "name": "PLCloud",
     "type": 2,
     "vendor": "Water ID",
-    "aliases": [],
+    "aliases": ["PoolLab Cloud Splitter"],
     "parentRequirements": [],
     "childRequirements": [
         "{1897FA08-1B5B-6159-9A74-B7410098D92C}"
