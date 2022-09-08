@@ -30,7 +30,7 @@ declare(strict_types=1);
 
             switch ($data['Buffer']['Command']) {
                 case 'GetMeasurements':
-                    $result = $this->GetMeasurements($data['Buffer']['StartTime'], $data['Buffer']['EndTime'],$data['Buffer']['ParameterName']);
+                    $result = $this->GetMeasurements($data['Buffer']['StartTime'], $data['Buffer']['EndTime'], $data['Buffer']['ParameterName']);
                     break;
                 default:
                 $this->SendDebug(__FUNCTION__, 'Invalid Command: ' . $data->Buffer->Command, 0);
