@@ -127,8 +127,12 @@ declare(strict_types=1);
 
                     //Löscht alle Daten für die Value Variable aus dem Archiv
                     AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident']), 0, 0);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']),true);
+
                     //Löscht alle Daten für die Comment Variable aus dem Archiv
                     AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), 0, 0);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'),true);
+                    
                     //Values
                     AC_AddLoggedValues($archiveID, $this->GetIDForIdent($variable['Ident']), $Values);
                     AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident']));
