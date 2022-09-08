@@ -132,7 +132,7 @@ declare(strict_types=1);
                     //Löscht alle Daten für die Comment Variable aus dem Archiv
                     AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), 0, 0);
                     AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'),true);
-                    
+
                     //Values
                     AC_AddLoggedValues($archiveID, $this->GetIDForIdent($variable['Ident']), $Values);
                     AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident']));
@@ -140,6 +140,10 @@ declare(strict_types=1);
                     //Comments to Values
                     AC_AddLoggedValues($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), $ValuesComments);
                     AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'));
+
+                    //Logging deaktivieren
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']),false);
+                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'),false);
                 }
 
                 $this->SendDebug('Update :: ' . $variable['Ident'], $measurements[0]['value'], 0);
