@@ -1,0 +1,10 @@
+{
+    "translations": {
+        "de": {
+            "Chlorine Total": "Gesamtchlor",
+            "Chlorine Total Comment": "Gesamtchlor Kommentar",
+            "Chlorine Free": "Freies Chlor",
+            "Chlorine Free Comment": "Freies Chlor Kommentar"
+        }
+    }
+}

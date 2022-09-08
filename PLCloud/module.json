@@ -1,0 +1,16 @@
+{
+    "id": "{229DD642-B66F-C8F0-A2F3-55CD927F9D8C}",
+    "name": "PLCloud",
+    "type": 2,
+    "vendor": "Water ID",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [
+        "{1897FA08-1B5B-6159-9A74-B7410098D92C}"
+    ],
+    "implemented": [
+        "{76339EB6-91E7-B97F-159C-71F769BA285A}"
+    ],
+    "prefix": "PL",
+    "url": "https://deinsmarthome.info"
+}

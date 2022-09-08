@@ -1,0 +1,16 @@
+{
+    "id": "{4CAC8B77-AE90-F628-E6D8-49E310B2262B}",
+    "name": "Configurator",
+    "type": 4,
+    "vendor": "Water ID",
+    "aliases": [],
+    "parentRequirements": [
+        "{76339EB6-91E7-B97F-159C-71F769BA285A}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{1897FA08-1B5B-6159-9A74-B7410098D92C}"
+    ],
+    "prefix": "PL",
+    "url": "https://deinsmarthome.info"
+}
