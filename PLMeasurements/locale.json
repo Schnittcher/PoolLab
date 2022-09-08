@@ -1,10 +1,15 @@
 {
     "translations": {
         "de": {
-            "Chlorine Total": "Gesamtchlor",
-            "Chlorine Total Comment": "Gesamtchlor Kommentar",
-            "Chlorine Free": "Freies Chlor",
-            "Chlorine Free Comment": "Freies Chlor Kommentar"
+            "Variables": "Variablen",
+            "PL Chlorine Total": "PL Gesamtchlor",
+            "PL Chlorine Total Comment": "PL Gesamtchlor Kommentar",
+            "PL Chlorine Free": "PL Freies Chlor",
+            "PL Chlorine Free Comment": "PL Freies Chlor Kommentar",
+            "Update archive data": "Archivdaten aktualisieren",
+            "Add data successful": "Hinzufügen der Daten war erfolgreich",
+            "Reaggregate variable successful": "Reaggregieren der Variable war erfolgreich",
+            "Danger! This function deletes all data from the archive.": "Achtung! Diese Funktion löscht alle Daten aus dem Archiv."
         }
     }
 }

@@ -60,6 +60,18 @@
             "values": []
         }
     ],
-    "actions": [],
+    "actions": [
+        {
+            "type": "Button",
+            "caption": "Update archive data",
+            "onClick": "PL_updateData($id,true);"
+        },
+        {
+            "type": "Label",
+            "caption": "Danger! This function deletes all data from the archive.",
+            "bold": true,
+            "color": 16711680
+        }
+    ],
     "status": []
 }

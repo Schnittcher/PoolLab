@@ -5,7 +5,7 @@ declare(strict_types=1);
     {
         public static $Variables = [
             ['PL_pH', 'PL pH', VARIABLETYPE_FLOAT, '', false, true],
-            ['PL_pH_Comment', 'PL pH', VARIABLETYPE_STRING, '', false, true],
+            ['PL_pH_Comment', 'PL pH Comment', VARIABLETYPE_STRING, '', false, true],
             ['PL_Chlorine_Total', 'PL Chlorine Total', VARIABLETYPE_FLOAT, '', false, true],
             ['PL_Chlorine_Total_Comment', 'PL Chlorine Total Comment', VARIABLETYPE_STRING, '', false, true],
             ['PL_Chlorine_Free', 'PL Chlorine Free', VARIABLETYPE_FLOAT, '', false, true],
@@ -80,14 +80,14 @@ declare(strict_types=1);
                 return;
             }
         }
-        public function updateData()
+        public function updateData(bool $archive = false)
         {
             $Variables = json_decode($this->ReadPropertyString('Variables'), true);
             foreach ($Variables as $key => $variable) {
-                if (strpos($variable['Ident'], '_Comment') !== false) {
+                if (!$variable['Keep']) {
                     continue;
                 }
-                if (!$variable['Keep']) {
+                if (strpos($variable['Ident'], '_Comment') !== false) {
                     continue;
                 }
                 $parameterName = str_replace('_', ' ', $variable['Ident']);
@@ -98,7 +98,46 @@ declare(strict_types=1);
                     continue;
                 }
 
-                print_r($measurements);
+                if ($archive) {
+                    $archiveID = IPS_GetInstanceListByModuleID('{43192F0B-135B-4CE7-A0A7-1475603F3060}')[0];
+                    $Values = [];
+                    $ValuesComments = [];
+                    foreach ($measurements as $key => $measurement) {
+                        switch ($variable['VarType']) {
+                            case VARIABLETYPE_FLOAT:
+                                $Value = floatval($measurement['value']);
+                                break;
+                            case VARIABLETYPE_INTEGER:
+                                $Value = intval($measurement['value']);
+                                break;
+                        }
+
+                        $Values[] = [
+                            'TimeStamp' => $measurement['timestamp'],
+                            'Value'     => $Value
+                        ];
+                        if (!empty($measurement['comment'])) {
+                            $ValuesComments[] = [
+                                'TimeStamp' => $measurement['timestamp'],
+                                'Value'     => strval($measurement['comment'])
+                            ];
+                        }
+                    }
+                    IPS_LogMessage($variable['Ident'], print_r($ValuesComments, true));
+
+                    //Löscht alle Daten für die Value Variable aus dem Archiv
+                    AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident']), 0, 0);
+                    //Löscht alle Daten für die Comment Variable aus dem Archiv
+                    AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), 0, 0);
+                    //Values
+                    AC_AddLoggedValues($archiveID, $this->GetIDForIdent($variable['Ident']), $Values);
+                    AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident']));
+
+                    //Comments to Values
+                    AC_AddLoggedValues($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), $ValuesComments);
+                    AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'));
+                }
+
                 $this->SendDebug('Update :: ' . $variable['Ident'], $measurements[0]['value'], 0);
                 $this->SetValue($variable['Ident'], $measurements[0]['value']);
                 $this->SetValue($variable['Ident'] . '_Comment', $measurements[0]['comment']);
