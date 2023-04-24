@@ -29,7 +29,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             ['PL_Chlorine_Free_Timestamp', 'Chlorine Free last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
             ['PL_TAlka', 'Alkalinity', VARIABLETYPE_FLOAT, '', false, true],
             ['PL_TAlka_State', 'Alkalinity State', VARIABLETYPE_STRING, 'PoolLab.State', false, true],
-            ['PL_TAlka_Idealow', 'Alkalinity ideal low', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_TAlka_Ideallow', 'Alkalinity ideal low', VARIABLETYPE_FLOAT, '', false, true],
             ['PL_TAlka_IdealHigh', 'Alkalinity ideal high', VARIABLETYPE_FLOAT, '', false, true],
             ['PL_TAlka_Comment', 'Alkalinity Comment', VARIABLETYPE_STRING, '', false, true],
             ['PL_TAlka_Timestamp', 'Alkalinity last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
