@@ -34,6 +34,10 @@ declare(strict_types=1);
                     $Query = '{Accounts{id,forename,surname,street,zipcode,city,phone1,phone2,fax,email,country,canton,notes,volume,pooltext,gps}}';
                     $result = $this->sendRequest($Query);
                     break;
+                case 'GetAccount':
+                    $Query = '{Accounts(id: '.$data['Buffer']['AccountID'].' ){id,forename,surname,street,zipcode,city,phone1,phone2,fax,email,country,canton,notes,volume,pooltext,gps}}';
+                    $result = $this->sendRequest($Query);
+                    break;
                 case 'GetMeasurements':
                 $Query = '{
                     Measurements(accountId: ' . $data['Buffer']['AccountID'] . ',from: 0, parameterName: "' . $data['Buffer']['ParameterName'] . '") {

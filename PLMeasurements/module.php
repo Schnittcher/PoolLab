@@ -1,19 +1,44 @@
 <?php
 
 declare(strict_types=1);
+
+require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.php';
+
     class PLMeasurements extends IPSModule
     {
+        use VariableProfileHelper;
+
         public static $Variables = [
-            ['PL_pH', 'PL pH', VARIABLETYPE_FLOAT, '', false, true],
-            ['PL_pH_Comment', 'PL pH Comment', VARIABLETYPE_STRING, '', false, true],
-            ['PL_Chlorine_Total', 'PL Chlorine Total', VARIABLETYPE_FLOAT, '', false, true],
-            ['PL_Chlorine_Total_Comment', 'PL Chlorine Total Comment', VARIABLETYPE_STRING, '', false, true],
-            ['PL_Chlorine_Free', 'PL Chlorine Free', VARIABLETYPE_FLOAT, '', false, true],
-            ['PL_Chlorine_Free_Comment', 'PL Chlorine Free Comment', VARIABLETYPE_STRING, '', false, true],
-            ['PL_TAlka', 'PL Alkalinity', VARIABLETYPE_FLOAT, '', false, true],
-            ['PL_TAlka_Comment', 'PL Alkalinity Comment', VARIABLETYPE_STRING, '', false, true],
-            ['PL_Cyanuric_Acid', 'PL Cyanuric Acid', VARIABLETYPE_FLOAT, '', false, true],
-            ['PL_Cyanuric_Acid_Comment', 'PL Cyanuric Acid Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_pH', 'pH', VARIABLETYPE_FLOAT, 'PoolLab.pH', false, true],
+            ['PL_pH_State', 'pH State', VARIABLETYPE_STRING, 'PoolLab.State', false, true],
+            ['PL_pH_IdealLow', 'pH ideal low', VARIABLETYPE_FLOAT, 'PoolLab.pH', false, true],
+            ['PL_pH_IdealHigh', 'pH ideal high', VARIABLETYPE_FLOAT, 'PoolLab.pH', false, true],
+            ['PL_pH_Comment', 'pH Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_pH_Timestamp', 'pH last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
+            ['PL_Chlorine_Total', 'Chlorine Total', VARIABLETYPE_FLOAT, 'PoolLab.mgl', false, true],
+            ['PL_Chlorine_Total_State', 'Chlorine Total State', VARIABLETYPE_STRING, 'PoolLab.State', false, true],
+            ['PL_Chlorine_Total_IdealLow', 'Chlorine Total ideal low', VARIABLETYPE_FLOAT, 'PoolLab.mgl', false, true],
+            ['PL_Chlorine_Total_IdealHigh', 'Chlorine Total ideal high', VARIABLETYPE_FLOAT, 'PoolLab.mgl', false, true],
+            ['PL_Chlorine_Total_Comment', 'Chlorine Total Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_Chlorine_Total_Timestamp', 'Chlorine Total last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
+            ['PL_Chlorine_Free', 'Chlorine Free', VARIABLETYPE_FLOAT, 'PoolLab.mgl', false, true],
+            ['PL_Chlorine_Free_State', 'Chlorine Free State', VARIABLETYPE_STRING, 'PoolLab.State', false, true],
+            ['PL_Chlorine_Free_IdealLow', 'Chlorine Free ideal low', VARIABLETYPE_FLOAT, 'PoolLab.mgl', false, true],
+            ['PL_Chlorine_Free_IdealHigh', 'Chlorine Free ideal high', VARIABLETYPE_FLOAT, 'PoolLab.mgl', false, true],
+            ['PL_Chlorine_Free_Comment', 'Chlorine Free Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_Chlorine_Free_Timestamp', 'Chlorine Free last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
+            ['PL_TAlka', 'Alkalinity', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_TAlka_State', 'Alkalinity State', VARIABLETYPE_STRING, 'PoolLab.State', false, true],
+            ['PL_TAlka_Idealow', 'Alkalinity ideal low', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_TAlka_IdealHigh', 'Alkalinity ideal high', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_TAlka_Comment', 'Alkalinity Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_TAlka_Timestamp', 'Alkalinity last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
+            ['PL_Cyanuric_Acid', 'Cyanuric Acid', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_Cyanuric_Acid_State', 'Cyanuric Acid State', VARIABLETYPE_STRING, 'PoolLab.State', false, true],
+            ['PL_Cyanuric_Acid_IdealLow', 'Cyanuric Acid ideal low', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_Cyanuric_Acid_IdealHigh', 'Cyanuric Acid ideal high', VARIABLETYPE_FLOAT, '', false, true],
+            ['PL_Cyanuric_Acid_Comment', 'Cyanuric Acid Comment', VARIABLETYPE_STRING, '', false, true],
+            ['PL_Cyanuric_Acid_Timestamp', 'Cyanuric Acid last measurement', VARIABLETYPE_INTEGER, '~UnixTimestamp', false, true],
         ];
 
         public function Create()
@@ -36,6 +61,20 @@ declare(strict_types=1);
                 ];
             }
             $this->RegisterPropertyString('Variables', json_encode($Variables));
+
+            if (!IPS_VariableProfileExists('PoolLab.pH')) {
+                $this->RegisterProfileFloat('PoolLab.pH', 'Information', '', ' pH', 0, 0, 0.01, 2);
+            }
+            if (!IPS_VariableProfileExists('PoolLab.mgl')) {
+                $this->RegisterProfileFloat('PoolLab.mgl', 'Information', '', ' mg/l', 0, 0, 0.01, 2);
+            }
+            if (!IPS_VariableProfileExists('PoolLab.State')) {
+                $this->RegisterProfileStringEx('PoolLab.State', 'Information', '', '', [
+                    ['toLow', $this->Translate('to low'), '', 0xFF0000],
+                    ['okay', $this->Translate('okay'), '', 0x008800],
+                    ['toHigh', $this->Translate('to high'), '', 0xFF0000],
+                ]);
+            }
         }
 
         public function Destroy()
@@ -155,6 +194,19 @@ declare(strict_types=1);
                 $this->SendDebug('Update :: ' . $variable['Ident'], $measurements[0]['value'], 0);
                 $this->SetValue($variable['Ident'], $measurements[0]['value']);
                 $this->SetValue($variable['Ident'] . '_Comment', $measurements[0]['comment']);
+                $this->SetValue($variable['Ident'] . '_Timestamp', $measurements[0]['timestamp']);
+                $this->SetValue($variable['Ident'] . '_IdealLow', $measurements[0]['ideal_low']);
+                $this->SetValue($variable['Ident'] . '_IdealHigh', $measurements[0]['ideal_high']);
+
+                if ($measurements[0]['value'] < $measurements[0]['ideal_low']) {
+                    $this->SetValue($variable['Ident'] . '_State', 'toLow');
+                }
+                if ($measurements[0]['value'] > $measurements[0]['ideal_high']) {
+                    $this->SetValue($variable['Ident'] . '_State', 'toHigh');
+                }
+                if (($measurements[0]['value'] >= $measurements[0]['ideal_low']) && ($measurements[0]['value'] <= $measurements[0]['ideal_high'])) {
+                    $this->SetValue($variable['Ident'] . '_State', 'okay');
+                }
             }
         }
 
@@ -177,6 +229,8 @@ declare(strict_types=1);
                 return [];
             }
             $Measurements = $results['data']['Measurements'];
+
+            IPS_LogMessage('test', print_r($Measurements, true));
 
             //Sortiere nach timestamp absteigend
             $timestamp = array_column($Measurements, 'timestamp');

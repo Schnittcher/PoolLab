@@ -1,7 +1,8 @@
 {
     "translations": {
         "de": {
-            "Account ID": "Account ID"
+            "Account ID": "Account ID",
+            "Pool Volume": "Poolgröße"
         }
     }
 }
