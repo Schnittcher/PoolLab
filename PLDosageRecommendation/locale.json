@@ -80,7 +80,8 @@
             "DEHA": "DEHA",
             "Temperature": "Temperatur",
             "Cadmium": "Kadmium",
-            "Lead": "Blei"
+            "Lead": "Blei",
+            "from": "von"
         }
     }
 }

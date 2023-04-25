@@ -113,7 +113,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             $this->EnableAction('targetValue');
             $this->RegisterVariableString('action', $this->Translate('Action'), 'PoolLab.Action', 4);
             $this->EnableAction('action');
-            $this->RegisterVariableString('dosageRecommendation', $this->Translate('Dosage recommendation'), '', 5);
+            $this->RegisterVariableString('dosageRecommendation', $this->Translate('Dosage recommendation'), '~HTMLBox', 5);
         }
 
         public function Destroy()
@@ -139,9 +139,16 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                     break;
                 case 'action':
                     $this->SetValue($Ident, $Value);
-                    $result = $this->calculate($this->GetValue('chemicGroup'), 0, $this->GetValue('waterVolume'), $this->GetValue('currentValue'), $this->GetValue('targetValue'));
-                    $DoseageRecommendation = $result['data']['DosageRecommendation'][0];
-                    $strDoseageRecommendation = $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
+                    $result = $this->calculate($this->GetValue('chemicGroup'), 1, $this->GetValue('waterVolume'), $this->GetValue('currentValue'), $this->GetValue('targetValue'));
+
+                    //$DoseageRecommendation = $result['data']['DosageRecommendation'][0];
+                    $strDoseageRecommendation = '';
+                    foreach ($result['data']['DosageRecommendation'] as $DoseageRecommendation) {
+                        $strDoseageRecommendation .= $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
+                        $strDoseageRecommendation .= '<hr>';
+                    }
+
+                    //$strDoseageRecommendation = $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
                     $this->SetValue('dosageRecommendation', $strDoseageRecommendation);
 
                     break;
@@ -151,7 +158,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             }
         }
 
-        private function calculate(int $groupID, int $unitID = 0, float $waterVolume, float $currentValue, float $targetValue)
+        private function calculate(int $groupID, int $unitID = 1, float $waterVolume, float $currentValue, float $targetValue)
         {
             $Data = [];
             $Buffer = [];

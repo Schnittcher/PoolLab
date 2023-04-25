@@ -99,7 +99,7 @@ declare(strict_types=1);
                 $this->LogMessage('PoolLab - API Error: ' . $HttpCode, KL_ERROR);
                 return false;
             }
-
+            $this->SendDebug('Response', $Response, 0);
             return json_decode($Response, true);
         }
     }
