@@ -23,6 +23,7 @@ Dieses Modul integriert die PoolLab Cloud, um die Messwerte in IP-Symcon zu übe
 ## 2. Enthaltene Module
 
 * [PLAccount](PLAccount/README.md)
+* [PLActiveChlor](PLActiveChlor/README.md)
 * [PLCloud](PLCloud/README.md)
 * [PLConfigurator](PLConfigurator/README.md)
 * [PLDosageRecommendation](PLDosageRecommendation/README.md)

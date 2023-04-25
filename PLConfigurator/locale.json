@@ -16,7 +16,8 @@
             "Pooltext": "Pooltext",
             "GPS": "GPS",
             "Measurements": "Messwerte",
-            "Dosage Recommendation": "Dosierungsempfehlung"
+            "Dosage Recommendation": "Dosierungsempfehlung",
+            "Active Chlor": "Aktives Chlor"
         }
     }
 }

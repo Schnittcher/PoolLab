@@ -53,6 +53,14 @@ declare(strict_types=1);
                       }';
                     $result = $this->sendRequest($Query);
                     break;
+                case 'activeChlor':
+                    $Query = '{
+                        ActiveChlorine( pH: ' . number_format($data['Buffer']['pH'], 2, '.', '') . ', temperature: ' . $data['Buffer']['temperature'] . ', chlorine: ' . number_format($data['Buffer']['chlorine'], 2, '.', '') . ', cya: ' . number_format($data['Buffer']['cya'], 2, '.', '') . ') {
+                            HOCl
+                        }
+                        }';
+                    $result = $this->sendRequest($Query);
+                    break;
                 case 'GetMeasurements':
                 $Query = '{
                     Measurements(accountId: ' . $data['Buffer']['AccountID'] . ',from: 0, parameterName: "' . $data['Buffer']['ParameterName'] . '") {

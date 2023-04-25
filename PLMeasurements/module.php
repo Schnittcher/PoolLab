@@ -243,8 +243,6 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             }
             $Measurements = $results['data']['Measurements'];
 
-            IPS_LogMessage('test', print_r($Measurements, true));
-
             //Sortiere nach timestamp absteigend
             $timestamp = array_column($Measurements, 'timestamp');
             array_multisort($timestamp, SORT_DESC, $Measurements);

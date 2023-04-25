@@ -1,0 +1,13 @@
+{
+    "translations": {
+        "de": {
+            "Action": "Aktion",
+            "Calculate": "Berechnen",
+            "Temperature": "Temperatur",
+            "pH": "pH",
+            "Chlorine": "Chlor",
+            "CYA": "CYA",
+            "Active Chlorine": "Aktives Chlor"
+        }
+    }
+}

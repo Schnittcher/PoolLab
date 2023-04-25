@@ -4,6 +4,7 @@ declare(strict_types=1);
 define('PL_ACCOUNT', '{5003D1FE-D820-150D-E709-8363BAE2CE11}');
 define('PL_MEASUREMENTS', '{9875F7F8-30F8-0978-4856-54EFA62B821E}');
 define('PL_DOSAGE_RECOMMENDATION', '{C142014F-282A-4AC4-8D6F-AA35648FB773}');
+define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
 
     class Configurator extends IPSModule
     {
@@ -120,6 +121,41 @@ define('PL_DOSAGE_RECOMMENDATION', '{C142014F-282A-4AC4-8D6F-AA35648FB773}');
                         [
                             'name'          => $this->Translate('Dosage Recommendation'),
                             'moduleID'      => PL_DOSAGE_RECOMMENDATION,
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => PL_ACCOUNT, //Splitter PLAccount
+                            'configuration' => [
+                                'AccountID' => $Account['id']
+                            ]
+                        ]
+                    ]
+                ];
+                $id++;
+                $Values[] = [
+                    'id'                             => $id,
+                    'parent'                         => intval($Account['id']),
+                    'DisplayName'                    => $this->Translate('Active Chlor'),
+                    'Forename'                       => '',
+                    'Surname'                        => '',
+                    'Street'                         => '',
+                    'Zipcode'                        => '',
+                    'City'                           => '',
+                    'Phone1'                         => '',
+                    'Phone2'                         => '',
+                    'Fax'                            => '',
+                    'EMail'                          => '',
+                    'Country'                        => '',
+                    'Canton'                         => '',
+                    'Notes'                          => '',
+                    'Volume'                         => '',
+                    'Pooltext'                       => '',
+                    'GPS'                            => '',
+                    'instanceID'                     => $this->getInstanceID($Account['id'], PL_ACTIVE_CHLOR),
+                    'create'                         => [
+                        [
+                            'name'          => $this->Translate('Dosage Recommendation'),
+                            'moduleID'      => PL_ACTIVE_CHLOR,
                             'configuration' => new stdClass()
                         ],
                         [
