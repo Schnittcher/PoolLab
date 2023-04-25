@@ -58,7 +58,16 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             return json_encode($result);
         }
 
-        public function GetAccount()
+        public function updateAccountVariables()
+        {
+            $result = $this->GetAccount()['data']['Accounts'];
+            IPS_LogMessage('test', print_r($result, true));
+            if (!empty($result)) {
+                $this->SetValue('PoolVolume', $result[0]['volume']);
+            }
+        }
+
+        private function GetAccount()
         {
             $Data = [];
             $Buffer = [];
@@ -76,7 +85,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             return $result;
         }
 
-        public function dosageRecommendation(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
+        private function dosageRecommendation(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
         {
             $Data = [];
             $Buffer = [];
@@ -97,7 +106,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             return $result;
         }
 
-        public function GetMeasurements(int $StartTime, int $EndTime, $parameterName)
+        private function GetMeasurements(int $StartTime, int $EndTime, $parameterName)
         {
             $Data = [];
             $Buffer = [];
@@ -115,14 +124,5 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 return [];
             }
             return $result;
-        }
-
-        public function updateAccountVariables()
-        {
-            $result = $this->GetAccount()['data']['Accounts'];
-            IPS_LogMessage('test', print_r($result, true));
-            if (!empty($result)) {
-                $this->SetValue('PoolVolume', $result[0]['volume']);
-            }
         }
     }

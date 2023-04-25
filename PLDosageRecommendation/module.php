@@ -151,7 +151,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             }
         }
 
-        public function calculate(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
+        private function calculate(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
         {
             $Data = [];
             $Buffer = [];
