@@ -103,7 +103,6 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 ]);
             }
 
-
             $this->RegisterVariableInteger('chemicGroup', $this->Translate('Chemic Group'), 'PoolLab.ChemieGruppe', 0);
             $this->EnableAction('chemicGroup');
             $this->RegisterVariableInteger('waterVolume', $this->Translate('Water volume'), 'PoolLab.m3', 1);

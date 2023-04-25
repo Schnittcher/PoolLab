@@ -48,7 +48,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                     $result = $this->GetMeasurements($data['Buffer']['StartTime'], $data['Buffer']['EndTime'], $data['Buffer']['ParameterName']);
                     break;
                 case 'dosageRecommendation':
-                    $result = $this->dosageRecommendation($data['Buffer']['groupID'], $data['Buffer']['unitID'], $data['Buffer']['waterVolume'],$data['Buffer']['currentValue'],$data['Buffer']['targetValue']);
+                    $result = $this->dosageRecommendation($data['Buffer']['groupID'], $data['Buffer']['unitID'], $data['Buffer']['waterVolume'], $data['Buffer']['currentValue'], $data['Buffer']['targetValue']);
                     break;
                 default:
                 $this->SendDebug(__FUNCTION__, 'Invalid Command: ' . $data->Buffer->Command, 0);
@@ -75,7 +75,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             }
             return $result;
         }
-        
+
         public function dosageRecommendation(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
         {
             $Data = [];
