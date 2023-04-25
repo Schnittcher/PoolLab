@@ -48,6 +48,8 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
 
             $this->ConnectParent('{5003D1FE-D820-150D-E709-8363BAE2CE11}');
 
+            $this->RegisterPropertyBoolean('Active', true);
+
             $Variables = [];
             foreach (static::$Variables as $Pos => $Variable) {
                 $Variables[] = [
@@ -75,6 +77,9 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                     ['toHigh', $this->Translate('to high'), '', 0xFF0000],
                 ]);
             }
+
+            $this->RegisterPropertyInteger('UpdateInterval', 3600);
+            $this->RegisterTimer('PL_updateMeasurements', 0, 'PL_updateData($_IPS[\'TARGET\'],false);');
         }
 
         public function Destroy()
@@ -121,6 +126,14 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 IPS_SetProperty($this->InstanceID, 'Variables', json_encode($Variables));
                 IPS_ApplyChanges($this->InstanceID);
                 return;
+            }
+
+            if ($this->ReadPropertyBoolean('Active')) {
+                $this->SetTimerInterval('PL_updateMeasurements', $this->ReadPropertyInteger('UpdateInterval') * 1000);
+                $this->SetStatus(102);
+            } else {
+                $this->SetTimerInterval('PL_updateMeasurements', 0);
+                $this->SetStatus(104);
             }
         }
         public function updateData(bool $archive = false)

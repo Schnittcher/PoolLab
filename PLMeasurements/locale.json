@@ -1,6 +1,9 @@
 {
     "translations": {
         "de": {
+            "Active": "Aktiv",
+            "Update interval": "Aktualisierungsintervall",
+            "Seconds": "Sekunden",
             "Variables": "Variablen",
             "pH State": "pH Staus",
             "pH ideal low": "pH Grenzwert (gering)",
@@ -31,6 +34,7 @@
             "Cyanuric Acid ideal high": "Cyanursäure Grenzwert (hoch)",
             "Cyanuric Acid Comment": "Cyanursäure Kommentar",
             "Cyanuric Acid last measurement": "Cyanursäure letzte Messung",
+            "Update data": "Aktualisiere Werte",
             "Update archive data": "Archivdaten aktualisieren",
             "Add data successful": "Hinzufügen der Daten war erfolgreich",
             "Reaggregate variable successful": "Reaggregieren der Variable war erfolgreich",

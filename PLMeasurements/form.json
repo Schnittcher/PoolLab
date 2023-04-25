@@ -1,6 +1,17 @@
 {
     "elements": [
         {
+            "type": "CheckBox",
+            "name": "Active",
+            "caption": "Active"
+        },
+        {
+            "type": "NumberSpinner",
+            "name": "UpdateInterval",
+            "caption": "Update interval",
+            "suffix": "Seconds"
+        },
+        {
             "type": "List",
             "name": "Variables",
             "caption": "Variables",
@@ -61,6 +72,11 @@
         }
     ],
     "actions": [
+        {
+            "type": "Button",
+            "caption": "Update data",
+            "onClick": "PL_updateData($id,false);"
+        },
         {
             "type": "Button",
             "caption": "Update archive data",

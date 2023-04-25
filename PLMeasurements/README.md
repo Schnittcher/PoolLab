@@ -11,7 +11,10 @@ Dieses Instanz spiegelt die Messwerte in IP-Symcon wieder.
    
    Feld | Beschreibung
    ------------ | ----------------
-   Variablen | Anhan dieser Liste kann ausgewählt werdne, welche Messwerte in Symcon übertragen werden sollen.
+   Aktiv | Über diese CheckBox kann die Instanz aktiv bzw. inaktiv geschaltet werden.
+   Aktualisierungsintervall | Hier kann in Sekunden die Zeit angegeben werden, wie oft die Werte von der Cloud abgerufen werden sollen.
+   Variablen | Anhand dieser Liste kann ausgewählt werden, welche Messwerte in Symcon übertragen werden sollen.
+   Aktualisiere Werte | Ruft die aktuellen Werte ab.
    Archivdaten aktualisieren | Mit diesem Button lassen sich alle Messwerte der Cloud in das Symcon Archiv übertragen.
    
    ## 2. Funktionen

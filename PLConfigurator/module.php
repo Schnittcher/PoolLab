@@ -134,7 +134,6 @@ define('PL_DOSAGE_RECOMMENDATION', '{C142014F-282A-4AC4-8D6F-AA35648FB773}');
             }
 
             $Form['actions'][0]['values'] = $Values;
-            IPS_LogMessage('test', print_r($Form, true));
             return json_encode($Form);
         }
 
@@ -155,11 +154,10 @@ define('PL_DOSAGE_RECOMMENDATION', '{C142014F-282A-4AC4-8D6F-AA35648FB773}');
             return $result;
         }
 
-        public function getInstanceID($accountID, $moduleID)
+        private function getInstanceID($accountID, $moduleID)
         {
             $InstanceIDs = IPS_GetInstanceListByModuleID($moduleID);
             foreach ($InstanceIDs as $ID) {
-                IPS_LogMessage('test', $ID);
                 $ConnectionID = IPS_GetInstance($ID)['ConnectionID'];
                 if (IPS_GetProperty($ConnectionID, 'AccountID') == $accountID) {
                     return $ID;
