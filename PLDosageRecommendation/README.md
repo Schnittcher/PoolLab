@@ -1,67 +1,20 @@
-# PLMeasurements
-Beschreibung des Moduls.
+# PLDosageRecommendation
+Anhand dieser Instanz kann die empfohlen Dosierung berechnet werden.
 
-### Inhaltsverzeichnis
+   ## Inhaltverzeichnis
+- [PLDosageRecommendation](#pldosagerecommendation)
+  - [Inhaltverzeichnis](#inhaltverzeichnis)
+  - [1. Konfiguration](#1-konfiguration)
+  - [2. Funktionen](#2-funktionen)
+  - [3. Webfront](#3-webfront)
 
-1. [Funktionsumfang](#1-funktionsumfang)
-2. [Voraussetzungen](#2-voraussetzungen)
-3. [Software-Installation](#3-software-installation)
-4. [Einrichten der Instanzen in IP-Symcon](#4-einrichten-der-instanzen-in-ip-symcon)
-5. [Statusvariablen und Profile](#5-statusvariablen-und-profile)
-6. [WebFront](#6-webfront)
-7. [PHP-Befehlsreferenz](#7-php-befehlsreferenz)
+## 1. Konfiguration
+   
+Keine Konfiguration nötig.
 
-### 1. Funktionsumfang
+## 2. Funktionen
+Keine öffentlichen Funktionen.   
 
-*
+## 3. Webfront
 
-### 2. Voraussetzungen
-
-- IP-Symcon ab Version 6.0
-
-### 3. Software-Installation
-
-* Über den Module Store das 'PLMeasurements'-Modul installieren.
-* Alternativ über das Module Control folgende URL hinzufügen
-
-### 4. Einrichten der Instanzen in IP-Symcon
-
- Unter 'Instanz hinzufügen' kann das 'PLMeasurements'-Modul mithilfe des Schnellfilters gefunden werden.  
-	- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
-
-__Konfigurationsseite__:
-
-Name     | Beschreibung
--------- | ------------------
-         |
-         |
-
-### 5. Statusvariablen und Profile
-
-Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzelner kann zu Fehlfunktionen führen.
-
-#### Statusvariablen
-
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
-
-#### Profile
-
-Name   | Typ
------- | -------
-       |
-       |
-
-### 6. WebFront
-
-Die Funktionalität, die das Modul im WebFront bietet.
-
-### 7. PHP-Befehlsreferenz
-
-`boolean PL_BeispielFunktion(integer $InstanzID);`
-Erklärung der Funktion.
-
-Beispiel:
-`PL_BeispielFunktion(12345);`
+Im Webfront müssen die Variablen "Chemische Gruppe", "Wassermenge", "Aktueller Wert" und "Zielwert" angegeben werden, mit einem klick auf Berechnen lässt sich die empfohlene Dosierung anhand der Produkte berechnen, welche für die jeweilige chemische Gruppe in der PoolLab Cloud hinterlegt sind. Sollte für eine chemische Gruppe kein Produkt in der PoolLab Cloud hinterlegt sein, wirft das Modul eine Fehlermeldung.

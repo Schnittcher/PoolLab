@@ -4,15 +4,17 @@
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 # PoolLab
-Dieses Modul integriert die PoolLab Cloud, um die Messwerte in IP-Symcon zu übertragen.
+Dieses Modul integriert die PoolLab Cloud, um die Messwerte in IP-Symcon zu übertragen, sowie den Dosierungsrechner von PoolLab.
  
    ## Inhaltverzeichnis
-   1. [Voraussetzungen](#1-voraussetzungen)
-   2. [Enthaltene Module](#2-enthaltene-module)
-   3. [Installation](#3-installation)
-   4. [Konfiguration in IP-Symcon](#4-konfiguration-in-ip-symcon)
-   5. [Spenden](#5-spenden)
-   6. [Lizenz](#6-lizenz)
+- [PoolLab](#poollab)
+  - [Inhaltverzeichnis](#inhaltverzeichnis)
+  - [1. Voraussetzungen](#1-voraussetzungen)
+  - [2. Enthaltene Module](#2-enthaltene-module)
+  - [3. Installation](#3-installation)
+  - [4. Konfiguration in IP-Symcon](#4-konfiguration-in-ip-symcon)
+  - [5. Spenden](#5-spenden)
+  - [6. Lizenz](#6-lizenz)
    
 ## 1. Voraussetzungen
 
@@ -20,18 +22,18 @@ Dieses Modul integriert die PoolLab Cloud, um die Messwerte in IP-Symcon zu übe
 
 ## 2. Enthaltene Module
 
-* PLAccount
-* PLCloud
-* PLCConfigurator
-* PLMeasurements
+* [PLAccount](PLAccount/README.md)
+* [PLCloud](PLCloud/README.md)
+* [PLConfigurator](PLConfigurator/README.md)
+* [PLDosageRecommendation](PLDosageRecommendation/README.md)
+* [PLMeasurements](PLMeasurements/README.md)
 
 ## 3. Installation
-Über den IP-Symcon Module Store. (Beta Version PoolLab)
+Über den IP-Symcon Module Store.
 
 ## 4. Konfiguration in IP-Symcon
-
-Nachdem das Modul installiert wurde, muss ein Konfigurator angelegt, beim Anlegen des Konfigurator wird nach einem Token gefragt, dieser kann im Cloud Portal von PoolLab unter Einstellungen generiert werden.
-Nachdem der Konfigurator angelegt worden ist, kann über diesen die Instanz für die Messwerte erstellt werden.
+Nach der Installation muss ein Konfigurator angelegt werden, beim Anlegen des Konfigurator wird nach einem Token gefragt, dieser kann im Cloud Portal von PoolLab unter Einstellungen generiert werden.
+Über den Konfigurator können die weiteren Instanzen angelegt werden.
 
 ## 5. Spenden
 
