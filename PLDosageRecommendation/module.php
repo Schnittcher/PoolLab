@@ -15,7 +15,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             $this->ConnectParent('{5003D1FE-D820-150D-E709-8363BAE2CE11}');
 
             if (!IPS_VariableProfileExists('PoolLab.m3')) {
-                $this->RegisterProfileInteger('PoolLab.m3', 'Drops', '', ' m³', 0, 999999, 1);
+                $this->RegisterProfileFloat('PoolLab.m3', 'Drops', '', ' m³', 0, 999, 0.5, 1);
             }
             if (!IPS_VariableProfileExists('PoolLab.ChemieGruppe')) {
                 $this->RegisterProfileIntegerEx('PoolLab.ChemieGruppe', 'Information', '', '', [
@@ -105,11 +105,11 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
 
             $this->RegisterVariableInteger('chemicGroup', $this->Translate('Chemic Group'), 'PoolLab.ChemieGruppe', 0);
             $this->EnableAction('chemicGroup');
-            $this->RegisterVariableInteger('waterVolume', $this->Translate('Water volume'), 'PoolLab.m3', 1);
+            $this->RegisterVariableFloat('waterVolume', $this->Translate('Water volume'), 'PoolLab.m3', 1);
             $this->EnableAction('waterVolume');
-            $this->RegisterVariableInteger('currentValue', $this->Translate('Current value'), '', 2);
+            $this->RegisterVariableFloat('currentValue', $this->Translate('Current value'), '', 2);
             $this->EnableAction('currentValue');
-            $this->RegisterVariableInteger('targetValue', $this->Translate('Target value'), '', 3);
+            $this->RegisterVariableFloat('targetValue', $this->Translate('Target value'), '', 3);
             $this->EnableAction('targetValue');
             $this->RegisterVariableString('action', $this->Translate('Action'), 'PoolLab.Action', 4);
             $this->EnableAction('action');
@@ -151,7 +151,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             }
         }
 
-        private function calculate(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
+        private function calculate(int $groupID, int $unitID = 0, float $waterVolume, float $currentValue, float $targetValue)
         {
             $Data = [];
             $Buffer = [];

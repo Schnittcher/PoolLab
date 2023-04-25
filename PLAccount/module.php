@@ -16,10 +16,10 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             $this->RegisterPropertyInteger('AccountID', 0);
 
             if (!IPS_VariableProfileExists('PoolLab.m3')) {
-                $this->RegisterProfileInteger('PoolLab.m3', 'Drops', '', ' m³', 0, 999, 1);
+                $this->RegisterProfileFloat('PoolLab.m3', 'Drops', '', ' m³', 0, 999, 0.5, 1);
             }
 
-            $this->RegisterVariableInteger('PoolVolume', $this->Translate('Pool Volume'), 'PoolLab.m3');
+            $this->RegisterVariableFloat('PoolVolume', $this->Translate('Pool Volume'), 'PoolLab.m3');
         }
 
         public function Destroy()
@@ -85,7 +85,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             return $result;
         }
 
-        private function dosageRecommendation(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
+        private function dosageRecommendation(int $groupID, int $unitID = 0, float $waterVolume, float $currentValue, float $targetValue)
         {
             $Data = [];
             $Buffer = [];
