@@ -16,7 +16,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             $this->RegisterPropertyInteger('AccountID', 0);
 
             if (!IPS_VariableProfileExists('PoolLab.m3')) {
-                $this->RegisterProfileInteger('PoolLab.m3', 'Drops', '', ' m³', 0, 0, 1);
+                $this->RegisterProfileInteger('PoolLab.m3', 'Drops', '', ' m³', 0, 999, 1);
             }
 
             $this->RegisterVariableInteger('PoolVolume', $this->Translate('Pool Volume'), 'PoolLab.m3');
@@ -47,6 +47,9 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 case 'GetMeasurements':
                     $result = $this->GetMeasurements($data['Buffer']['StartTime'], $data['Buffer']['EndTime'], $data['Buffer']['ParameterName']);
                     break;
+                case 'dosageRecommendation':
+                    $result = $this->dosageRecommendation($data['Buffer']['groupID'], $data['Buffer']['unitID'], $data['Buffer']['waterVolume'],$data['Buffer']['currentValue'],$data['Buffer']['targetValue']);
+                    break;
                 default:
                 $this->SendDebug(__FUNCTION__, 'Invalid Command: ' . $data->Buffer->Command, 0);
                 break;
@@ -66,6 +69,27 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
             $Data['Buffer'] = $Buffer;
             $Data = json_encode($Data);
             $result = $this->SendDataToParent($Data);
+            $result = json_decode($this->SendDataToParent($Data), true);
+            if (!$result) {
+                return [];
+            }
+            return $result;
+        }
+        
+        public function dosageRecommendation(int $groupID, int $unitID = 0, int $waterVolume, int $currentValue, int $targetValue)
+        {
+            $Data = [];
+            $Buffer = [];
+
+            $Data['DataID'] = '{76339EB6-91E7-B97F-159C-71F769BA285A}';
+            $Buffer['Command'] = 'dosageRecommendation';
+            $Buffer['groupID'] = $groupID;
+            $Buffer['unitID'] = $unitID;
+            $Buffer['waterVolume'] = $waterVolume;
+            $Buffer['currentValue'] = $currentValue;
+            $Buffer['targetValue'] = $targetValue;
+            $Data['Buffer'] = $Buffer;
+            $Data = json_encode($Data);
             $result = json_decode($this->SendDataToParent($Data), true);
             if (!$result) {
                 return [];

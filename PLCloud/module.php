@@ -35,7 +35,22 @@ declare(strict_types=1);
                     $result = $this->sendRequest($Query);
                     break;
                 case 'GetAccount':
-                    $Query = '{Accounts(id: '.$data['Buffer']['AccountID'].' ){id,forename,surname,street,zipcode,city,phone1,phone2,fax,email,country,canton,notes,volume,pooltext,gps}}';
+                    $Query = '{Accounts(id: ' . $data['Buffer']['AccountID'] . ' ){id,forename,surname,street,zipcode,city,phone1,phone2,fax,email,country,canton,notes,volume,pooltext,gps}}';
+                    $result = $this->sendRequest($Query);
+                    break;
+                case 'dosageRecommendation':
+                    $Query = '{
+                        DosageRecommendation(groupId: ' . $data['Buffer']['groupID'] . ', unitId: ' . $data['Buffer']['unitID'] . ', waterVolume: ' . $data['Buffer']['waterVolume'] . ', currentValue: ' . $data['Buffer']['currentValue'] . ', targetValue: ' . $data['Buffer']['targetValue'] . ') {
+                          result
+                          unit
+                          WaterConditioners {
+                            id
+                            name
+                            effect
+                            phrase
+                          }
+                        }
+                      }';
                     $result = $this->sendRequest($Query);
                     break;
                 case 'GetMeasurements':

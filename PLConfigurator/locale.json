@@ -1,8 +1,22 @@
 {
     "translations": {
         "de": {
-            "Translation 1": "Übersetzung 1",
-            "Translation 2": "Übersetzung 2"
+            "Configurator": "Konfigurator",
+            "Name": "Name",
+            "Street": "Straße",
+            "Zipcode": "PLZ",
+            "Phone 1": "Telefonnummer 1",
+            "Phone 2": "Telefonnummer 2",
+            "Fax": "Fax",
+            "E-Mail": "E-Mail",
+            "Country": "Land",
+            "Canton": "Bundesland",
+            "Notes": "Notizen",
+            "Volume (m³)": "Wassermenge (m³)",
+            "Pooltext": "Pooltext",
+            "GPS": "GPS",
+            "Measurements": "Messwerte",
+            "Dosage Recommendation": "Dosierungsempfehlung"
         }
     }
 }

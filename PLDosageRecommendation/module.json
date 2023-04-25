@@ -1,0 +1,16 @@
+{
+    "id": "{C142014F-282A-4AC4-8D6F-AA35648FB773}",
+    "name": "PLDosageRecommendation",
+    "type": 3,
+    "vendor": "Water ID",
+    "aliases": ["PoolLab Dosierung"],
+    "parentRequirements": [
+        "{962271EC-68EA-19B9-2732-49D5D8EEBC45}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{BDB301B3-E29A-F60F-89D0-9DF13FC45DF4}"
+    ],
+    "prefix": "PL",
+    "url": "https://deinsmarthome.info"
+}

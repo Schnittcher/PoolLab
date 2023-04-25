@@ -33,7 +33,7 @@
               {
                  "caption": "Name",
                  "name": "DisplayName",
-                 "width": "350px"
+                 "width": "auto"
               },
               {
                  "caption": "Street",
@@ -58,12 +58,14 @@
              {
                 "caption": "Phone2",
                 "name": "Phone2",
-                "width": "150px"
+                "width": "150px",
+                "visible": false
              },
              {
                 "caption": "Fax",
                 "name": "Fax",
-                "width": "150px"
+                "width": "150px",
+                "visible": false
              },
              {
                 "caption": "E-Mail",
@@ -73,32 +75,36 @@
              {
                 "caption": "Country",
                 "name": "Country",
-                "width": "150px"
+                "width": "150px",
+                "visible": false
              },
              {
                 "caption": "Canton",
                 "name": "Canton",
-                "width": "100px"
+                "width": "100px",
+                "visible": false
              },
              {
                 "caption": "Notes",
                 "name": "Notes",
-                "width": "350px"
+                "width": "350px",
+                "visible": false
              },
              {
-                "caption": "Volume",
+                "caption": "Volume (m³)",
                 "name": "Volume",
-                "width": "100px"
+                "width": "150px"
              },
              {
                 "caption": "Pooltext",
                 "name": "Pooltext",
-                "width": "350px"
+                "width": "200px"
              },
              {
                 "caption": "GPS",
                 "name": "GPS",
-                "width": "350px"
+                "width": "350px",
+                "visible": false
              }
            ],
            "values": []
