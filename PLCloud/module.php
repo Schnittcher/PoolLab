@@ -40,7 +40,7 @@ declare(strict_types=1);
                     break;
                 case 'dosageRecommendation':
                     $Query = '{
-                        DosageRecommendation(groupId: ' . $data['Buffer']['groupID'] . ', unitId: ' . $data['Buffer']['unitID'] . ', waterVolume: ' . $data['Buffer']['waterVolume'] . ', currentValue: ' . $data['Buffer']['currentValue'] . ', targetValue: ' . $data['Buffer']['targetValue'] . ') {
+                        DosageRecommendation(groupId: ' . $data['Buffer']['groupID'] . ', unitId: ' . $data['Buffer']['unitID'] . ', waterVolume: ' . number_format($data['Buffer']['waterVolume'], 2, '.', '') . ', currentValue: ' . number_format($data['Buffer']['currentValue'], 2, '.', '') . ', targetValue: ' . number_format($data['Buffer']['targetValue'], 2, '.', '') . ') {
                           result
                           unit
                           WaterConditioners {
@@ -81,6 +81,7 @@ declare(strict_types=1);
 
         private function sendRequest(string $Query)
         {
+            $this->SendDebug('Query', $Query, 0);
             $headers[] = 'Content-Type: application/json';
             $headers[] = 'Authorization: ' . $this->ReadPropertyString('Token');
             $Query = ['query'=>$Query];
