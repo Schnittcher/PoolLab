@@ -65,7 +65,6 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
         public function updateAccountVariables()
         {
             $result = $this->GetAccount()['data']['Accounts'];
-            IPS_LogMessage('test', print_r($result, true));
             if (!empty($result)) {
                 $this->SetValue('PoolVolume', $result[0]['volume']);
             }
