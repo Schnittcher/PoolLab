@@ -181,7 +181,6 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                             ];
                         }
                     }
-                    IPS_LogMessage($variable['Ident'], print_r($ValuesComments, true));
 
                     //Löscht alle Daten für die Value Variable aus dem Archiv
                     AC_DeleteVariableData($archiveID, $this->GetIDForIdent($variable['Ident']), 0, 0);
@@ -200,8 +199,8 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                     AC_ReAggregateVariable($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'));
 
                     //Logging deaktivieren
-                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']), false);
-                    AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), false);
+                    //AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident']), false);
+                    //AC_SetLoggingStatus($archiveID, $this->GetIDForIdent($variable['Ident'] . '_Comment'), false);
                 }
 
                 $this->SendDebug('Update :: ' . $variable['Ident'], $measurements[0]['value'], 0);

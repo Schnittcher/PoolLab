@@ -140,14 +140,13 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 case 'action':
                     $this->SetValue($Ident, $Value);
                     $result = $this->calculate($this->GetValue('chemicGroup'), 1, $this->GetValue('waterVolume'), $this->GetValue('currentValue'), $this->GetValue('targetValue'));
-
+                    
                     //$DoseageRecommendation = $result['data']['DosageRecommendation'][0];
                     $strDoseageRecommendation = '';
                     foreach ($result['data']['DosageRecommendation'] as $DoseageRecommendation) {
                         $strDoseageRecommendation .= $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
                         $strDoseageRecommendation .= '<hr>';
                     }
-
                     //$strDoseageRecommendation = $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
                     $this->SetValue('dosageRecommendation', $strDoseageRecommendation);
 
