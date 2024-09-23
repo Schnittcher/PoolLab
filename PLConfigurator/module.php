@@ -160,7 +160,7 @@ define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
                     'instanceID'                     => $this->getInstanceID($Account['id'], PL_ACTIVE_CHLOR),
                     'create'                         => [
                         [
-                            'name'          => $this->Translate('Dosage Recommendation'),
+                            'name'          => $this->Translate('Active Chlor'),
                             'moduleID'      => PL_ACTIVE_CHLOR,
                             'configuration' => new stdClass()
                         ],
