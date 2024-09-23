@@ -26,6 +26,10 @@ define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
             //Never delete this line!
             parent::ApplyChanges();
         }
+        private function isNull(&$value)
+        {
+            $value = $value ?? '';
+        }
 
         public function GetConfigurationForm()
         {
@@ -41,7 +45,9 @@ define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
 
             $Values = [];
             $id = 9000;
-            foreach ($Accounts['Accounts'] as $key => $Account) {
+            foreach ($Accounts['Accounts'] as $key => &$Account) {
+
+                array_walk($Account, [$this, 'isNull']);
                 $Values[] = [
                     'id'                                 => intval($Account['id']),
                     'parent'                             => 0,
@@ -168,8 +174,9 @@ define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
                 ];
                 $id++;
             }
-
             $Form['actions'][0]['values'] = $Values;
+            IPS_LogMessage('test',json_encode($Form));
+
             return json_encode($Form);
         }
 
