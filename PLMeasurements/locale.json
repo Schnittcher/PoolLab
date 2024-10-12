@@ -2,6 +2,7 @@
     "translations": {
         "de": {
             "Active": "Aktiv",
+            "Action": "Aktion",
             "Update interval": "Aktualisierungsintervall",
             "Seconds": "Sekunden",
             "Variables": "Variablen",

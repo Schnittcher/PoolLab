@@ -78,6 +78,15 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 ]);
             }
 
+            if (!IPS_VariableProfileExists('PoolLab.Update')) {
+                $this->RegisterProfileStringEx('PoolLab.Update', 'Information', '', '', [
+                    ['update_data', $this->Translate('Update data'), '', 0x00FF00]
+                ]);
+            }
+
+            $this->RegisterVariableString('action', $this->Translate('Action'), 'PoolLab.Update', 4);
+            $this->EnableAction('action');
+
             $this->RegisterPropertyInteger('UpdateInterval', 3600);
             $this->RegisterTimer('PL_updateMeasurements', 0, 'PL_updateData($_IPS[\'TARGET\'],false);');
         }
@@ -136,6 +145,18 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 $this->SetStatus(104);
             }
         }
+
+        public function RequestAction($Ident, $Value)
+        {
+            switch ($Ident) {
+                case 'action':
+                    $this->updateData();
+                    break;
+                default:
+                    break;
+                }
+        }
+
         public function updateData(bool $archive = false)
         {
             $Variables = json_decode($this->ReadPropertyString('Variables'), true);
