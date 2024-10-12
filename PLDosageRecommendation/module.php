@@ -144,7 +144,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                     //$DoseageRecommendation = $result['data']['DosageRecommendation'][0];
                     $strDoseageRecommendation = '';
                     foreach ($result['data']['DosageRecommendation'] as $DoseageRecommendation) {
-                        $strDoseageRecommendation .= $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
+                        $strDoseageRecommendation .= $DoseageRecommendation['result'] . ' ' . $this->Translate($DoseageRecommendation['unit']) . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];
                         $strDoseageRecommendation .= '<hr>';
                     }
                     //$strDoseageRecommendation = $DoseageRecommendation['result'] . ' ' . $DoseageRecommendation['unit'] . ' ' . $this->Translate('from') . ' ' . $DoseageRecommendation['WaterConditioners'][0]['name'];

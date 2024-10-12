@@ -81,7 +81,8 @@
             "Temperature": "Temperatur",
             "Cadmium": "Kadmium",
             "Lead": "Blei",
-            "from": "von"
+            "from": "von",
+            "pieces": "Stück"
         }
     }
 }
