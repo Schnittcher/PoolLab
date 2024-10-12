@@ -28,7 +28,7 @@ require_once __DIR__ . '/../libs/vendor/SymconModulHelper/VariableProfileHelper.
                 $this->RegisterProfileInteger('PoolLab.Temperature', 'Temperature', '', ' °C', 0, 80, 1);
             }
 
-            $this->RegisterVariableInteger('pH', $this->Translate('pH'), '', 0);
+            $this->RegisterVariableFloat('pH', $this->Translate('pH'), '', 0);
             $this->EnableAction('pH');
             $this->RegisterVariableInteger('temperature', $this->Translate('Temperature'), 'PoolLab.Temperature', 1);
             $this->EnableAction('temperature');
