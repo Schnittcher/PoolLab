@@ -175,7 +175,6 @@ define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
                 $id++;
             }
             $Form['actions'][0]['values'] = $Values;
-            IPS_LogMessage('test',json_encode($Form));
 
             return json_encode($Form);
         }
