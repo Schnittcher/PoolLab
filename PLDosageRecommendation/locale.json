@@ -69,7 +69,7 @@
             "Permanganate": "Permanganat",
             "Hydrocarbons": "Kohlenwasserstoffe",
             "Phenol": "Phenol",
-            "Dissolved Oxygen": "Öl",
+            "Dissolved Oxygen": "Gelöster Sauerstoff",
             "Peracetic Acid": "Peressigsäure",
             "Electronic Conductivity": "Elektronische Leitfähigkeit",
             "ORP": "Redoxpotential (ORP)",
@@ -82,7 +82,12 @@
             "Cadmium": "Kadmium",
             "Lead": "Blei",
             "from": "von",
-            "pieces": "Stück"
+            "pieces": "Stück",
+            "Oil": "Öl",
+            "Donations": "Spenden / Schenkung",
+            "This module is free for non-commercial use. Donations to support the author are accepted here:    ": "Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:    ",
+            "IGG": "IGG",
+            "Active": "Aktiv"
         }
     }
 }

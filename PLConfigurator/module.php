@@ -1,211 +1,92 @@
 <?php
 
 declare(strict_types=1);
-define('PL_ACCOUNT', '{5003D1FE-D820-150D-E709-8363BAE2CE11}');
-define('PL_MEASUREMENTS', '{9875F7F8-30F8-0978-4856-54EFA62B821E}');
-define('PL_DOSAGE_RECOMMENDATION', '{C142014F-282A-4AC4-8D6F-AA35648FB773}');
-define('PL_ACTIVE_CHLOR', '{741F0852-47FA-4865-B90D-CE87A386F29C}');
 
-    class Configurator extends IPSModule
+class PLConfigurator extends IPSModuleStrict
+{
+    private const CLOUD_GUID = '{229DD642-B66F-C8F0-A2F3-55CD927F9D8C}';
+    private const TO_CLOUD = '{76339EB6-91E7-B97F-159C-71F769BA285A}';
+
+    private const ACCOUNT_MODULE = '{5003D1FE-D820-150D-E709-8363BAE2CE11}';
+    private const MEASUREMENTS_MODULE = '{9875F7F8-30F8-0978-4856-54EFA62B821E}';
+    private const DOSAGE_MODULE = '{C142014F-282A-4AC4-8D6F-AA35648FB773}';
+    private const ACTIVE_CHLOR_MODULE = '{741F0852-47FA-4865-B90D-CE87A386F29C}';
+
+    public function Create(): void
     {
-        public function Create()
-        {
-            //Never delete this line!
-            parent::Create();
-            $this->RequireParent('{229DD642-B66F-C8F0-A2F3-55CD927F9D8C}');
-        }
+        //Never delete this line!
+        parent::Create();
 
-        public function Destroy()
-        {
-            //Never delete this line!
-            parent::Destroy();
-        }
-
-        public function ApplyChanges()
-        {
-            //Never delete this line!
-            parent::ApplyChanges();
-        }
-
-        public function GetConfigurationForm()
-        {
-            $Form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-
-            $Accounts = $this->getAccounts();
-
-            if (!array_key_exists('data', $Accounts)) {
-                $Accounts = [];
-            } else {
-                $Accounts = $Accounts['data'];
-            }
-
-            $Values = [];
-            $id = 9000;
-            if (array_key_exists('Accounts', $Accounts)) {
-                foreach ($Accounts['Accounts'] as $key => &$Account) {
-                    array_walk($Account, [$this, 'isNull']);
-                    $Values[] = [
-                        'id'                                 => intval($Account['id']),
-                        'parent'                             => 0,
-                        'DisplayName'                        => $Account['forename'] . ' ' . $Account['surname'],
-                        'Forename'                           => $Account['forename'],
-                        'Surname'                            => $Account['surname'],
-                        'Street'                             => $Account['street'],
-                        'Zipcode'                            => $Account['zipcode'],
-                        'City'                               => $Account['city'],
-                        'Phone1'                             => $Account['phone1'],
-                        'Phone2'                             => $Account['phone2'],
-                        'Fax'                                => $Account['fax'],
-                        'EMail'                              => $Account['email'],
-                        'Country'                            => $Account['country'],
-                        'Canton'                             => $Account['canton'],
-                        'Notes'                              => $Account['notes'],
-                        'Volume'                             => $Account['volume'],
-                        'Pooltext'                           => $Account['pooltext'],
-                        'GPS'                                => $Account['gps']
-                    ];
-                    $Values[] = [
-                        'id'                             => $id,
-                        'parent'                         => intval($Account['id']),
-                        'DisplayName'                    => $this->Translate('Measurements'),
-                        'Forename'                       => '',
-                        'Surname'                        => '',
-                        'Street'                         => '',
-                        'Zipcode'                        => '',
-                        'City'                           => '',
-                        'Phone1'                         => '',
-                        'Phone2'                         => '',
-                        'Fax'                            => '',
-                        'EMail'                          => '',
-                        'Country'                        => '',
-                        'Canton'                         => '',
-                        'Notes'                          => '',
-                        'Volume'                         => '',
-                        'Pooltext'                       => '',
-                        'GPS'                            => '',
-                        'instanceID'                     => $this->getInstanceID($Account['id'], PL_MEASUREMENTS),
-                        'create'                         => [
-                            [
-                                'name'          => $this->Translate('Measurements'),
-                                'moduleID'      => PL_MEASUREMENTS,
-                                'configuration' => new stdClass()
-                            ],
-                            [
-                                'moduleID'      => PL_ACCOUNT, //Splitter PLAccount
-                                'configuration' => [
-                                    'AccountID' => $Account['id']
-                                ]
-                            ]
-                        ]
-                    ];
-                    $id++;
-                    $Values[] = [
-                        'id'                             => $id,
-                        'parent'                         => intval($Account['id']),
-                        'DisplayName'                    => $this->Translate('Dosage Recommendation'),
-                        'Forename'                       => '',
-                        'Surname'                        => '',
-                        'Street'                         => '',
-                        'Zipcode'                        => '',
-                        'City'                           => '',
-                        'Phone1'                         => '',
-                        'Phone2'                         => '',
-                        'Fax'                            => '',
-                        'EMail'                          => '',
-                        'Country'                        => '',
-                        'Canton'                         => '',
-                        'Notes'                          => '',
-                        'Volume'                         => '',
-                        'Pooltext'                       => '',
-                        'GPS'                            => '',
-                        'instanceID'                     => $this->getInstanceID($Account['id'], PL_DOSAGE_RECOMMENDATION),
-                        'create'                         => [
-                            [
-                                'name'          => $this->Translate('Dosage Recommendation'),
-                                'moduleID'      => PL_DOSAGE_RECOMMENDATION,
-                                'configuration' => new stdClass()
-                            ],
-                            [
-                                'moduleID'      => PL_ACCOUNT, //Splitter PLAccount
-                                'configuration' => [
-                                    'AccountID' => $Account['id']
-                                ]
-                            ]
-                        ]
-                    ];
-                    $id++;
-                    $Values[] = [
-                        'id'                             => $id,
-                        'parent'                         => intval($Account['id']),
-                        'DisplayName'                    => $this->Translate('Active Chlor'),
-                        'Forename'                       => '',
-                        'Surname'                        => '',
-                        'Street'                         => '',
-                        'Zipcode'                        => '',
-                        'City'                           => '',
-                        'Phone1'                         => '',
-                        'Phone2'                         => '',
-                        'Fax'                            => '',
-                        'EMail'                          => '',
-                        'Country'                        => '',
-                        'Canton'                         => '',
-                        'Notes'                          => '',
-                        'Volume'                         => '',
-                        'Pooltext'                       => '',
-                        'GPS'                            => '',
-                        'instanceID'                     => $this->getInstanceID($Account['id'], PL_ACTIVE_CHLOR),
-                        'create'                         => [
-                            [
-                                'name'          => $this->Translate('Active Chlor'),
-                                'moduleID'      => PL_ACTIVE_CHLOR,
-                                'configuration' => new stdClass()
-                            ],
-                            [
-                                'moduleID'      => PL_ACCOUNT, //Splitter PLAccount
-                                'configuration' => [
-                                    'AccountID' => $Account['id']
-                                ]
-                            ]
-                        ]
-                    ];
-                    $id++;
-                }
-            }
-            $Form['actions'][0]['values'] = $Values;
-
-            return json_encode($Form);
-        }
-
-        public function getAccounts()
-        {
-            $Data = [];
-            $Buffer = [];
-
-            $Data['DataID'] = '{76339EB6-91E7-B97F-159C-71F769BA285A}';
-            $Buffer['Command'] = 'getAccounts';
-            $Buffer['Params'] = '';
-            $Data['Buffer'] = $Buffer;
-            $Data = json_encode($Data);
-            $result = json_decode($this->SendDataToParent($Data), true);
-            if (!$result) {
-                return [];
-            }
-            return $result;
-        }
-        private function isNull(&$value)
-        {
-            $value = $value ?? '';
-        }
-
-        private function getInstanceID($accountID, $moduleID)
-        {
-            $InstanceIDs = IPS_GetInstanceListByModuleID($moduleID);
-            foreach ($InstanceIDs as $ID) {
-                $ConnectionID = IPS_GetInstance($ID)['ConnectionID'];
-                if (IPS_GetProperty($ConnectionID, 'AccountID') == $accountID) {
-                    return $ID;
-                }
-            }
-            return 0;
-        }
+        $this->RequireParent(self::CLOUD_GUID);
     }
+
+    public function GetConfigurationForm(): string
+    {
+        $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+        $form['actions'][0]['values'] = $this->getValues();
+        return json_encode($form);
+    }
+
+    private function getValues(): array
+    {
+        if (!$this->HasActiveParent()) {
+            return [];
+        }
+        $response = $this->SendDataToParent(json_encode(['DataID' => self::TO_CLOUD, 'Buffer' => ['Command' => 'GetAccounts']]));
+        $result = json_decode($response, true);
+        if (!is_array($result) || !($result['ok'] ?? false)) {
+            $this->SendDebug(__FUNCTION__, 'Accounts could not be read', 0);
+            return [];
+        }
+
+        $values = [];
+        $childID = 9000;
+        foreach ($result['data']['Accounts'] ?? [] as $account) {
+            $accountID = intval($account['id']);
+            $values[] = [
+                'id'          => $accountID,
+                'parent'      => 0,
+                'DisplayName' => trim(strval($account['forename']) . ' ' . strval($account['surname'])),
+                'City'        => strval($account['city'] ?? ''),
+                'Volume'      => strval($account['volume'] ?? '')
+            ];
+            foreach ([
+                ['Measurements', self::MEASUREMENTS_MODULE],
+                ['Dosage Recommendation', self::DOSAGE_MODULE],
+                ['Active Chlor', self::ACTIVE_CHLOR_MODULE]
+            ] as [$caption, $moduleID]) {
+                $values[] = [
+                    'id'          => $childID++,
+                    'parent'      => $accountID,
+                    'DisplayName' => $this->Translate($caption),
+                    'City'        => '',
+                    'Volume'      => '',
+                    'instanceID'  => $this->getInstanceID($accountID, $moduleID),
+                    'create'      => [
+                        [
+                            'name'          => $this->Translate($caption),
+                            'moduleID'      => $moduleID,
+                            'configuration' => new stdClass()
+                        ],
+                        [
+                            'moduleID'      => self::ACCOUNT_MODULE,
+                            'configuration' => ['AccountID' => $accountID]
+                        ]
+                    ]
+                ];
+            }
+        }
+        return $values;
+    }
+
+    private function getInstanceID(int $AccountID, string $ModuleID): int
+    {
+        foreach (IPS_GetInstanceListByModuleID($ModuleID) as $instanceID) {
+            $connectionID = IPS_GetInstance($instanceID)['ConnectionID'];
+            if ($connectionID > 0 && IPS_GetProperty($connectionID, 'AccountID') === $AccountID) {
+                return $instanceID;
+            }
+        }
+        return 0;
+    }
+}

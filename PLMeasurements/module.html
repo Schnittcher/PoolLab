@@ -1,0 +1,96 @@
+<div id="pl-tile" class="pl-tile"></div>
+
+<script>
+(function () {
+    const root = document.getElementById('pl-tile');
+
+    const element = PoolLabTile.element;
+
+    function fit() {
+        PoolLabTile.fit(root);
+    }
+
+    function formatTime(timestamp) {
+        return new Date(timestamp * 1000).toLocaleString(undefined, { dateStyle: 'short', timeStyle: 'short' });
+    }
+
+    // Skala: Zielbereich in der Mitte, links und rechts je einmal seine Breite
+    function scale(row) {
+        if (!Number.isFinite(row.low) || !Number.isFinite(row.high) || (row.low === 0 && row.high === 0)) {
+            return null;
+        }
+        const span = row.high > row.low ? row.high - row.low : Math.max(Math.abs(row.high) * 0.2, 1);
+        const min = row.low - span;
+        const max = row.low + 2 * span;
+        let position = (row.raw - min) / (max - min);
+        if (row.state === 'overrange') {
+            position = 1;
+        } else if (row.state === 'underrange') {
+            position = 0;
+        }
+        return {
+            left: ((row.low - min) / (max - min)) * 100,
+            width: (span / (max - min)) * 100,
+            position: Math.min(Math.max(position, 0), 1) * 100
+        };
+    }
+
+    function renderRow(row, texts) {
+        const card = element('div', 'pl-card');
+
+        const line = element('div', 'pl-line');
+        line.appendChild(element('span', 'pl-name', row.name));
+        line.appendChild(element('span', 'pl-value', row.value));
+        card.appendChild(line);
+
+        const axis = scale(row);
+        if (axis) {
+            const bar = element('div', 'pl-bar');
+            const band = element('div', 'pl-band');
+            band.style.left = axis.left + '%';
+            band.style.width = axis.width + '%';
+            const marker = element('div', 'pl-marker pl-' + row.state);
+            marker.style.left = axis.position + '%';
+            bar.appendChild(band);
+            bar.appendChild(marker);
+            card.appendChild(bar);
+        }
+
+        const info = element('div', 'pl-line pl-small');
+        info.appendChild(element('span', '', axis ? texts.range + ': ' + row.range : ''));
+        info.appendChild(element('span', 'pl-state pl-' + row.state, row.stateText));
+        card.appendChild(info);
+
+        card.appendChild(element('div', 'pl-small', formatTime(row.time)));
+        if (row.comment !== '') {
+            card.appendChild(element('div', 'pl-small', row.comment));
+        }
+        return card;
+    }
+
+    function handleMessage(message) {
+        const data = JSON.parse(message);
+        root.replaceChildren();
+
+        if (data.rows.length === 0) {
+            root.appendChild(element('div', 'pl-empty', data.texts.empty));
+            fit();
+            return;
+        }
+
+        const head = element('div', 'pl-head');
+        head.appendChild(element('span', '', data.type));
+        head.appendChild(element('span', '', data.device !== '' ? data.texts.device + ': ' + data.device : ''));
+        root.appendChild(head);
+
+        data.rows.forEach(function (row) {
+            root.appendChild(renderRow(row, data.texts));
+        });
+        fit();
+    }
+
+    window.handleMessage = handleMessage;
+    window.addEventListener('resize', fit);
+    fit();
+})();
+</script>

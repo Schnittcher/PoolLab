@@ -1,7 +1,17 @@
 {
     "translations": {
         "de": {
-            "API Token": "API Token"
+            "API token": "API-Token",
+            "Test connection": "Verbindung testen",
+            "Connected to the LabCOM cloud": "Mit der LabCOM-Cloud verbunden",
+            "API token missing": "API-Token fehlt",
+            "API token rejected by the cloud": "API-Token von der Cloud abgelehnt",
+            "LabCOM cloud not reachable": "LabCOM-Cloud nicht erreichbar",
+            "The API token is missing.": "Der API-Token fehlt.",
+            "Connection failed:": "Verbindung fehlgeschlagen:",
+            "Connection successful, %d account(s) found.": "Verbindung erfolgreich, %d Konto/Konten gefunden.",
+            "Donations": "Spenden / Schenkung",
+            "This module is free for non-commercial use. Donations to support the author are accepted here:    ": "Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:    "
         }
     }
 }

@@ -1,19 +1,25 @@
 {
     "elements": [
         {
-            "name": "AccountID",
             "type": "NumberSpinner",
-            "caption": "Account ID"
-          }
+            "name": "AccountID",
+            "caption": "Account ID",
+            "minimum": 0
+        }
     ],
     "actions": [
         {
-            "type": "Label",
-            "caption": "Spenden / Schenkung"
+            "type": "Button",
+            "caption": "Update pool volume",
+            "onClick": "PL_UpdateAccount($id);"
         },
         {
             "type": "Label",
-            "caption": "Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:    "
+            "caption": "Donations"
+        },
+        {
+            "type": "Label",
+            "caption": "This module is free for non-commercial use. Donations to support the author are accepted here:    "
         },
         {
             "type": "RowLayout",
@@ -35,5 +41,16 @@
             ]
         }
     ],
-    "status": []
+    "status": [
+        {
+            "code": 102,
+            "icon": "active",
+            "caption": "Active"
+        },
+        {
+            "code": 201,
+            "icon": "error",
+            "caption": "Account ID missing"
+        }
+    ]
 }

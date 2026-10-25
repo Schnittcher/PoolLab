@@ -4,3 +4,7 @@
 script.tmp
 libs/composer.*
 libs/phpunit.*
+# Lokale Projektdateien (Forum, ADRs)
+docs/FORUM_POST.md
+docs/FORUM_CHANGELOG.md
+docs/adr/

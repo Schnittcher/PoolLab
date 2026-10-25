@@ -1,30 +1,42 @@
 # PLActiveChlor
-Anhand dieser Instanz kann das aktive Chlor berechnet werden..
+Berechnet mit der LabCOM-Cloud den Anteil an aktivem Chlor (HOCl) aus pH-Wert, Temperatur, Chlor und Cyanursäure. Die Instanz wird über den Konfigurator angelegt.
 
-   ## Inhaltverzeichnis
+## Inhaltsverzeichnis
 - [PLActiveChlor](#plactivechlor)
-  - [Inhaltverzeichnis](#inhaltverzeichnis)
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
   - [1. Konfiguration](#1-konfiguration)
-  - [2. Funktionen](#2-funktionen)
-  - [3. Webfront](#3-webfront)
+  - [2. Variablen](#2-variablen)
+  - [3. Kachel](#3-kachel)
+  - [4. Funktionen](#4-funktionen)
+  - [5. Spenden](#5-spenden)
+  - [6. Lizenz](#6-lizenz)
 
 ## 1. Konfiguration
-   
-Keine Konfiguration nötig.
+Die Instanz hat keine Einstellungen. Bedient wird sie über ihre Variablen, zum Beispiel im WebFront.
 
-## 2. Funktionen
+## 2. Variablen
+Variable | Ident | Typ | Beschreibung
+------------ | ------------ | ------------ | ----------------
+pH | `pH` | Kommazahl | pH-Wert. Steuerbar.
+Temperatur | `temperature` | Ganzzahl (°C) | Wassertemperatur. Steuerbar.
+Chlor | `chlorine` | Kommazahl (mg/l) | Chlorgehalt. Steuerbar.
+CYA | `cya` | Kommazahl (mg/l) | Cyanursäure. Steuerbar.
+Aktion | `action` | Text | „Berechnen“ startet die Berechnung. Steuerbar.
+Aktives Chlor | `activeChlorine` | Kommazahl (mg/l HOCl) | Ergebnis der Berechnung.
 
-```
-PL_calculateActiveChlor(int $InstanceID,int $temperature, float $pH, float $chlorine, float $cya)
-```
+## 3. Kachel
+Die Kachel zeigt die vier Eingaben (pH, Temperatur, Chlor, Cyanursäure), die Schaltfläche „Berechnen“ und das Ergebnis. Eingaben werden beim Verlassen des Feldes übernommen. Die Kachel nutzt Schrift und Farben der Visualisierung.
 
-Mit dieser Funktion kann das aktive Chlor berechnet werden.
+Die maximierte Ansicht der Kachel braucht Symcon 9.1. Unter Symcon 9.0 bleibt sie leer.
 
-**Beispiel**
-```
-$result = PL_calculateActiveChlor(12345, 20, 7, 1.5, 10);
-```
+## 4. Funktionen
+Die Instanz hat keine öffentlichen Funktionen.
 
-## 3. Webfront
+## 5. Spenden
+Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:
 
-Im Webfront müssen die Variablen "pH", "Temperatur", "Chlor" und "CYA" angegeben werden, mit einem klick auf Berechnen lässt sich das aktive Chlor berechnen.
+[![PayPal](https://img.shields.io/badge/PayPal-Spenden-00457C?logo=paypal&logoColor=white&style=for-the-badge)](https://www.paypal.com/donate?hosted_button_id=EK4JRP87XLSHW) [![Amazon Wunschzettel](https://img.shields.io/badge/Amazon-Wunschzettel-FF9900?logo=amazon&logoColor=white&style=for-the-badge)](https://www.amazon.de/hz/wishlist/ls/3JVWED9SZMDPK?ref_=wl_share)
+
+## 6. Lizenz
+
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)

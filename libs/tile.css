@@ -1,0 +1,204 @@
+/* Gemeinsames Stylesheet der Kacheln. Schrift, Schriftgroesse, Raender und Farben gibt die Visualisierung vor. */
+/* Nur die Kachel scrollt, nie die Seite: kein zweiter, breiter Balken am Fensterrand */
+html,
+body {
+    overflow: hidden;
+}
+
+.pl-tile {
+    --pl-ok: #2e9e4f;
+    --pl-bad: #d9483b;
+    --pl-warn: #e69500;
+    --pl-line: color-mix(in srgb, var(--content-color) 14%, transparent);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    overflow-y: auto;
+    padding-right: 0.7em;
+    font: inherit;
+    color: var(--content-color);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--content-color) 30%, transparent) transparent;
+}
+
+.pl-tile::-webkit-scrollbar {
+    width: 0.35em;
+}
+
+.pl-tile::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pl-tile::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--content-color) 30%, transparent);
+    border-radius: 0.2em;
+}
+
+.pl-tile::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+.pl-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6em;
+    font-size: 0.8em;
+    color: color-mix(in srgb, var(--content-color) 65%, transparent);
+}
+
+.pl-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45em;
+    padding: 0.7em 0.9em;
+    background: var(--card-color);
+    border: 0.07em solid var(--pl-line);
+    border-radius: 0.7em;
+}
+
+.pl-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.6em;
+}
+
+.pl-name {
+    font-weight: 700;
+}
+
+.pl-value {
+    font-weight: 700;
+    font-size: 1.2em;
+    white-space: nowrap;
+}
+
+.pl-bar {
+    position: relative;
+    height: 0.45em;
+    margin: 0.35em 0;
+    background: color-mix(in srgb, var(--content-color) 15%, transparent);
+    border-radius: 0.25em;
+}
+
+.pl-band {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: color-mix(in srgb, var(--pl-ok) 55%, transparent);
+    border-radius: 0.25em;
+}
+
+.pl-marker {
+    position: absolute;
+    top: 50%;
+    width: 0.9em;
+    height: 0.9em;
+    margin: -0.45em 0 0 -0.45em;
+    border-radius: 50%;
+    border: 0.15em solid var(--card-color);
+    background: color-mix(in srgb, var(--content-color) 55%, transparent);
+}
+
+.pl-small {
+    font-size: 0.8em;
+    color: color-mix(in srgb, var(--content-color) 65%, transparent);
+}
+
+.pl-state {
+    font-weight: 700;
+}
+
+.pl-okay {
+    color: var(--pl-ok);
+}
+
+.pl-tooLow,
+.pl-tooHigh {
+    color: var(--pl-bad);
+}
+
+.pl-overrange,
+.pl-underrange {
+    color: var(--pl-warn);
+}
+
+.pl-marker.pl-okay {
+    background: var(--pl-ok);
+}
+
+.pl-marker.pl-tooLow,
+.pl-marker.pl-tooHigh {
+    background: var(--pl-bad);
+}
+
+.pl-marker.pl-overrange,
+.pl-marker.pl-underrange {
+    background: var(--pl-warn);
+}
+
+.pl-empty {
+    padding: 1em 0;
+    text-align: center;
+    color: color-mix(in srgb, var(--content-color) 65%, transparent);
+}
+
+.pl-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.pl-input {
+    box-sizing: border-box;
+    width: 7em;
+    padding: 0.3em 0.5em;
+    font: inherit;
+    text-align: right;
+    color: inherit;
+    background: color-mix(in srgb, var(--content-color) 8%, transparent);
+    border: 0.07em solid var(--pl-line);
+    border-radius: 0.4em;
+}
+
+select.pl-input {
+    width: auto;
+    max-width: 65%;
+    text-align: left;
+    background: var(--card-color);
+}
+
+.pl-input:focus {
+    outline: 0.1em solid var(--accent-color);
+}
+
+.pl-button {
+    padding: 0.5em 1em;
+    font: inherit;
+    font-weight: 700;
+    color: var(--card-color);
+    background: var(--accent-color);
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.pl-button:hover {
+    background: color-mix(in srgb, var(--accent-color) 85%, var(--content-color));
+}
+
+.pl-result {
+    padding: 0.35em 0;
+    border-top: 0.07em solid var(--pl-line);
+}
+
+.pl-result:first-child {
+    border-top: none;
+}
+
+/* Abstand oben, damit die erste Zeile unter dem Maximieren-Knopf der Visualisierung liegt */
+.pl-first {
+    margin-top: 1.8em;
+}

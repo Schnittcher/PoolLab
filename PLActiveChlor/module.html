@@ -1,0 +1,72 @@
+<div id="pl-tile" class="pl-tile"></div>
+
+<script>
+(function () {
+    const root = document.getElementById('pl-tile');
+    const element = PoolLabTile.element;
+    const inputs = {};
+    let result = null;
+    let built = false;
+
+    function fit() {
+        PoolLabTile.fit(root);
+    }
+
+    function build(data) {
+        root.replaceChildren();
+
+        const form = element('div', 'pl-card');
+        data.fields.forEach(function (field) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.className = 'pl-input';
+            input.min = field.min;
+            input.max = field.max;
+            input.step = field.step;
+            input.addEventListener('change', function () {
+                if (input.value !== '') {
+                    requestAction(field.ident, input.value);
+                }
+            });
+            inputs[field.ident] = input;
+            form.appendChild(PoolLabTile.row(field.label + (field.suffix !== '' ? ' (' + field.suffix + ')' : ''), input));
+        });
+
+        const button = element('button', 'pl-button', data.texts.calculate);
+        button.type = 'button';
+        button.addEventListener('click', function () {
+            requestAction('action', 'calculate');
+        });
+        form.appendChild(button);
+        root.appendChild(form);
+
+        const card = element('div', 'pl-card');
+        const line = element('div', 'pl-line');
+        line.appendChild(element('span', 'pl-name', data.texts.result));
+        result = element('span', 'pl-value');
+        line.appendChild(result);
+        card.appendChild(line);
+        root.appendChild(card);
+        built = true;
+    }
+
+    function handleMessage(message) {
+        const data = JSON.parse(message);
+        if (!built) {
+            build(data);
+        }
+        // Ein Feld, in dem gerade getippt wird, bleibt unveraendert
+        data.fields.forEach(function (field) {
+            if (document.activeElement !== inputs[field.ident]) {
+                inputs[field.ident].value = field.value;
+            }
+        });
+        result.textContent = data.result;
+        fit();
+    }
+
+    window.handleMessage = handleMessage;
+    window.addEventListener('resize', fit);
+    fit();
+})();
+</script>

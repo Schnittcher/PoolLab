@@ -3,13 +3,18 @@
     "name": "PLAccount",
     "type": 2,
     "vendor": "Water ID",
-    "aliases": ["PoolLab Account Splitter"],
-    "parentRequirements": ["{76339EB6-91E7-B97F-159C-71F769BA285A}"],
+    "aliases": [
+        "PoolLab Account Splitter"
+    ],
+    "parentRequirements": [
+        "{76339EB6-91E7-B97F-159C-71F769BA285A}"
+    ],
     "childRequirements": [
         "{BDB301B3-E29A-F60F-89D0-9DF13FC45DF4}"
     ],
     "implemented": [
-        "{962271EC-68EA-19B9-2732-49D5D8EEBC45}","{1897FA08-1B5B-6159-9A74-B7410098D92C}"
+        "{962271EC-68EA-19B9-2732-49D5D8EEBC45}",
+        "{1897FA08-1B5B-6159-9A74-B7410098D92C}"
     ],
     "prefix": "PL",
     "url": "https://deinsmarthome.info"

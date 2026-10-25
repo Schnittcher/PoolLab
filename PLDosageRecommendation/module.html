@@ -1,0 +1,90 @@
+<div id="pl-tile" class="pl-tile"></div>
+
+<script>
+(function () {
+    const root = document.getElementById('pl-tile');
+    const element = PoolLabTile.element;
+    const inputs = {};
+    let group = null;
+    let results = null;
+    let built = false;
+
+    function fit() {
+        PoolLabTile.fit(root);
+    }
+
+    function build(data) {
+        root.replaceChildren();
+
+        const form = element('div', 'pl-card pl-first');
+
+        group = document.createElement('select');
+        group.className = 'pl-input';
+        data.groups.forEach(function (entry) {
+            const option = document.createElement('option');
+            option.value = entry.id;
+            option.textContent = entry.name;
+            group.appendChild(option);
+        });
+        group.addEventListener('change', function () {
+            requestAction('chemicGroup', group.value);
+        });
+        form.appendChild(PoolLabTile.row(data.texts.group, group));
+
+        data.fields.forEach(function (field) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.className = 'pl-input';
+            input.step = field.step;
+            input.addEventListener('change', function () {
+                if (input.value !== '') {
+                    requestAction(field.ident, input.value);
+                }
+            });
+            inputs[field.ident] = input;
+            form.appendChild(PoolLabTile.row(field.label + (field.suffix !== '' ? ' (' + field.suffix + ')' : ''), input));
+        });
+
+        const button = element('button', 'pl-button', data.texts.calculate);
+        button.type = 'button';
+        button.addEventListener('click', function () {
+            requestAction('action', 'calculate');
+        });
+        form.appendChild(button);
+        root.appendChild(form);
+
+        const card = element('div', 'pl-card');
+        card.appendChild(element('div', 'pl-name', data.texts.result));
+        results = element('div');
+        card.appendChild(results);
+        root.appendChild(card);
+        built = true;
+    }
+
+    function handleMessage(message) {
+        const data = JSON.parse(message);
+        if (!built) {
+            build(data);
+        }
+        // Ein Feld, in dem gerade getippt wird oder dessen Liste offen ist, bleibt unveraendert
+        if (document.activeElement !== group) {
+            group.value = data.group;
+        }
+        data.fields.forEach(function (field) {
+            if (document.activeElement !== inputs[field.ident]) {
+                inputs[field.ident].value = field.value;
+            }
+        });
+
+        results.replaceChildren();
+        data.lines.forEach(function (line) {
+            results.appendChild(element('div', 'pl-result', line));
+        });
+        fit();
+    }
+
+    window.handleMessage = handleMessage;
+    window.addEventListener('resize', fit);
+    fit();
+})();
+</script>
