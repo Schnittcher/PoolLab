@@ -42,8 +42,6 @@ class PLMeasurements extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent(self::ACCOUNT_GUID);
-
         $this->RegisterPropertyBoolean('Active', true);
         $this->RegisterPropertyInteger('UpdateInterval', 600);
         $this->RegisterPropertyString('DeviceSerial', '');
@@ -56,6 +54,12 @@ class PLMeasurements extends IPSModuleStrict
         $this->RegisterTimer('UpdateData', 0, 'PL_UpdateData($_IPS[\'TARGET\']);');
 
         $this->setTileType();
+    }
+
+    public function GetCompatibleParents(): string
+    {
+        //IPSModuleStrict kennt kein ConnectParent: die Konsole verbindet ueber diese Angabe, fehlt der Parent, wird er angelegt
+        return json_encode(['type' => 'connect', 'moduleIDs' => [self::ACCOUNT_GUID]]);
     }
 
     public function GetVisualizationTile(): string

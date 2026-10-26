@@ -12,12 +12,10 @@ class PLConfigurator extends IPSModuleStrict
     private const DOSAGE_MODULE = '{C142014F-282A-4AC4-8D6F-AA35648FB773}';
     private const ACTIVE_CHLOR_MODULE = '{741F0852-47FA-4865-B90D-CE87A386F29C}';
 
-    public function Create(): void
+    public function GetCompatibleParents(): string
     {
-        //Never delete this line!
-        parent::Create();
-
-        $this->RequireParent(self::CLOUD_GUID);
+        //IPSModuleStrict kennt kein RequireParent: die Konsole verbindet ueber diese Angabe, fehlt der Parent, wird er angelegt
+        return json_encode(['type' => 'connect', 'moduleIDs' => [self::CLOUD_GUID]]);
     }
 
     public function GetConfigurationForm(): string
@@ -71,6 +69,11 @@ class PLConfigurator extends IPSModuleStrict
                         [
                             'moduleID'      => self::ACCOUNT_MODULE,
                             'configuration' => ['AccountID' => $accountID]
+                        ],
+                        //Ohne ConnectParent muss die Kette bis zum Cloud-Gateway reichen, ein vorhandenes wird wiederverwendet
+                        [
+                            'moduleID'      => self::CLOUD_GUID,
+                            'configuration' => new stdClass()
                         ]
                     ]
                 ];

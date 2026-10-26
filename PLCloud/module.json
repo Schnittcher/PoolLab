@@ -1,7 +1,7 @@
 {
     "id": "{229DD642-B66F-C8F0-A2F3-55CD927F9D8C}",
     "name": "PLCloud",
-    "type": 2,
+    "type": 1,
     "vendor": "Water ID",
     "aliases": [
         "PoolLab Cloud Splitter"

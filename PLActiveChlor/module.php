@@ -24,8 +24,13 @@ class PLActiveChlor extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent(self::ACCOUNT_GUID);
         $this->setTileType();
+    }
+
+    public function GetCompatibleParents(): string
+    {
+        //IPSModuleStrict kennt kein ConnectParent: die Konsole verbindet ueber diese Angabe, fehlt der Parent, wird er angelegt
+        return json_encode(['type' => 'connect', 'moduleIDs' => [self::ACCOUNT_GUID]]);
     }
 
     public function ApplyChanges(): void

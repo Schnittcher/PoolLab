@@ -14,8 +14,13 @@ class PLAccount extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent(self::CLOUD_GUID);
         $this->RegisterPropertyInteger('AccountID', 0);
+    }
+
+    public function GetCompatibleParents(): string
+    {
+        //IPSModuleStrict kennt kein ConnectParent: die Konsole verbindet ueber diese Angabe, fehlt der Parent, wird er angelegt
+        return json_encode(['type' => 'connect', 'moduleIDs' => [self::CLOUD_GUID]]);
     }
 
     public function ApplyChanges(): void

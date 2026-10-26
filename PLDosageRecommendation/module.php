@@ -34,11 +34,15 @@ class PLDosageRecommendation extends IPSModuleStrict
         //Never delete this line!
         parent::Create();
 
-        $this->ConnectParent(self::ACCOUNT_GUID);
-
         //Ergebniszeilen der letzten Berechnung fuer die Kachel
         $this->RegisterAttributeString('Lines', '[]');
         $this->setTileType();
+    }
+
+    public function GetCompatibleParents(): string
+    {
+        //IPSModuleStrict kennt kein ConnectParent: die Konsole verbindet ueber diese Angabe, fehlt der Parent, wird er angelegt
+        return json_encode(['type' => 'connect', 'moduleIDs' => [self::ACCOUNT_GUID]]);
     }
 
     public function GetVisualizationTile(): string
