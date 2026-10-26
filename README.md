@@ -12,10 +12,11 @@ Dieses Modul überträgt die Messwerte der PoolLab-Photometer aus der LabCOM-Clo
   - [1. Voraussetzungen](#1-voraussetzungen)
   - [2. Funktionsumfang](#2-funktionsumfang)
   - [3. Enthaltene Module](#3-enthaltene-module)
-  - [4. Installation](#4-installation)
-  - [5. Konfiguration in IP-Symcon](#5-konfiguration-in-ip-symcon)
-  - [6. Spenden](#6-spenden)
-  - [7. Lizenz](#7-lizenz)
+  - [4. Screenshots](#4-screenshots)
+  - [5. Installation](#5-installation)
+  - [6. Konfiguration in IP-Symcon](#6-konfiguration-in-ip-symcon)
+  - [7. Spenden](#7-spenden)
+  - [8. Lizenz](#8-lizenz)
 
 ## 1. Voraussetzungen
 
@@ -54,20 +55,28 @@ Die einzelnen Funktionen stehen in den Modul-Beschreibungen.
 * [PLActiveChlor](PLActiveChlor/README.md)
   * Aktives Chlor
 
-## 4. Installation
+## 4. Screenshots
+
+![Messwerte](docs/screenshots/messwerte.png)
+
+![Dosierungsempfehlung](docs/screenshots/dosierempfehlung.png)
+
+![Aktives Chlor](docs/screenshots/aktives_chlor.png)
+
+## 5. Installation
 Über den IP-Symcon Module Store.
 
-## 5. Konfiguration in IP-Symcon
+## 6. Konfiguration in IP-Symcon
 1. Auf labcom.cloud unter den Benutzereinstellungen einen API-Token erzeugen.
 2. Einen Konfigurator anlegen. Dabei wird das Cloud-Gateway erzeugt, dort den Token eintragen.
 3. Im Konfigurator für jeden Pool die gewünschten Instanzen anlegen.
 
-## 6. Spenden
+## 7. Spenden
 
 Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:
 
 [![PayPal](https://img.shields.io/badge/PayPal-Spenden-00457C?logo=paypal&logoColor=white&style=for-the-badge)](https://www.paypal.com/donate?hosted_button_id=EK4JRP87XLSHW) [![Amazon Wunschzettel](https://img.shields.io/badge/Amazon-Wunschzettel-FF9900?logo=amazon&logoColor=white&style=for-the-badge)](https://www.amazon.de/hz/wishlist/ls/3JVWED9SZMDPK?ref_=wl_share)
 
-## 7. Lizenz
+## 8. Lizenz
 
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
